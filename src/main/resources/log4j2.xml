@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+    	<!--dev location-->
+        <Property name="log-path">C:/logs/</Property>
+        <Property name="log-default">test-tika</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="${log-path}/${log-default}.log" immediateFlush="false" filePattern="${log-path}/${log-default}-%d{yyyy-MM-dd}-%i.log" >
+            <PatternLayout>
+                <pattern>[%-5p][%d{dd/MM/yy HH:mm a}][%C{1}]-%m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="20 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="4"/>
+        </RollingFile>
+        <Console name="STDOUT" target="SYSTEM_OUT" ignoreExceptions="false">
+      		<PatternLayout pattern="[%-5p][%d{dd/MM/yy HH:mm a}][%C{1}]-%m%n"/>
+    	</Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="root" level="info" additivity="false">
+            <appender-ref ref="RollingFile" />
+        </Logger>
+        <Root level="debug" additivity="false">
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
